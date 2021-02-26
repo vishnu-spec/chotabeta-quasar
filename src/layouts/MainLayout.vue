@@ -17,7 +17,7 @@
     to="/"
     style="color:white;"
   >
-          Eagle Dashboard
+          CB Dashboard
            </q-item>
         </q-toolbar-title>
 
@@ -79,6 +79,7 @@
       </q-item-label>
     </q-item-section>
   </q-item>
+
       </q-list>
     </q-drawer>
 

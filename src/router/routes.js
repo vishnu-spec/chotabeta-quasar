@@ -7,9 +7,12 @@ const routes = [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/table', component: () => import('../components/table.vue') },
       { path: '/list', component: () => import('../components/list.vue') },
-
-
-
+      { path: '/cancelorders', component: () => import('../components/cancelorders.vue') },
+      { path: '/ratingorder', component: () => import('../components/ratingorder.vue') },
+      { path: '/pincodelogs', component: () => import('../components/pincodelogs.vue') },
+      { path: '/usercount', component: () => import('../components/usercount.vue') },
+      { path: '/newuser', component: () => import('../components/newuser.vue') }
+      // { path: '/liveorders', component: () => import('../components/liveorders.vue') },
     ]
   },
   {

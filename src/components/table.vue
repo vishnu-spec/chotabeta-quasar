@@ -86,7 +86,7 @@
       :data="data"
       :columns="columns"
       row-key="index"
-      style="height:600px; font-weight: 600"
+      style="height:600px;"
       :pagination="initialPagination"
       binary-state-sort
        />
@@ -220,7 +220,7 @@ this.getdates();
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/testenv/api/admin/orders-dashboard',
+       axios.post('https://chotabeta.app/dev/redis_test/testenv/api/admin/orders-dashboard',
        {
            "from_date": vm.today_date,
         "to_date": vm.today_date
@@ -255,7 +255,7 @@ this.getdates();
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/testenv/api/admin/orders-dashboard',
+       axios.post('https://chotabeta.app/dev/redis_test/testenv/api/admin/orders-dashboard',
        {
            "from_date": vm.yesterday_date,
         "to_date": vm.yesterday_date
@@ -329,7 +329,7 @@ today = mm + '/' + dd + '/' + yyyy;
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/testenv/api/admin/orders-dashboard',
+       axios.post('https://chotabeta.app/dev/redis_test/testenv/api/admin/orders-dashboard',
        {
            "from_date": vm.from_date,
         "to_date": vm.to_date
@@ -379,7 +379,7 @@ today = mm + '/' + dd + '/' + yyyy;
     z-index: 1
   thead tr:first-child th
     top: 0
-    font-weight: 600
+
 
   /* this is when the loading indicator appears */
   &.q-table--loading thead tr:last-child th

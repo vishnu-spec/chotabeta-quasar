@@ -4,7 +4,7 @@
       <div class="row">
          <td>
 
-              <q-btn label="B2B Today" @click="gettodaydata" type="submit" color="primary" style="margin-left:20px;margin-bottom: 20px;"/>
+              <q-btn label="LIVE ORDERS" @click="gettodaydata" type="submit" color="primary" style="margin-left:20px;margin-bottom: 20px;"/>
               <q-btn label="Export to csv" icon-right="archive" @click="exportTable" type="submit" color="primary" style="margin-left:50px;margin-bottom: 20px;"/>
     <!-- <q-form
       @submit="Filter"
@@ -17,7 +17,7 @@
             </div>
     <q-table
      class="my-sticky-header-table"
-       title="B2B Todays Order"
+       title="Live Ongoing Order"
       :data="data"
 
       :columns="columns"
@@ -79,26 +79,27 @@ export default {
         //   format: val => `${val}`,
         //   sortable: true
         // },
-        { name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true },
-        { name: 'order_city', label: 'Order City', field: 'order_city', sortable: true },
-        { name: 'order_city_status', label: 'order city status', field: 'order_city_status', sortable: true },
-        { name: 'uid', label: 'uid', field: 'uid', sortable: true },
-        { name: 'user_name', label: 'user_name', field: 'user_name', sortable: true },
-        { name: 'order_user_mobile', label: 'order_user_mobile', field: 'order_user_mobile', sortable: true },
-        { name: 'service_name2', label: 'service_name2', field: 'service_name2', sortable: true },
-        { name: 'order_date', label: 'order_date', field: 'order_date', sortable: true },
-        { name: 'amount', label: 'amount', field: 'amount', sortable: true },
-        { name: 'online', label: 'online', field: 'online', sortable: true },
-        { name: 'delivery_boy_name', label: 'delivery_boy_name', field: 'delivery_boy_name', sortable: true },
-        { name: 'status', label: 'status', field: 'status', sortable: true },
-        { name: 'agent_number', label: 'agent_number', field: 'agent_number', sortable: true },
-        { name: 'order_status_string', label: 'order_status_string', field: 'order_status_string', sortable: true },
-        { name: 'created_at', label: 'created_at', field: 'created_at', sortable: true },
-        { name: 'delivered_at', label: 'delivered_at', field: 'delivered_at', sortable: true },
-        { name: 'actual_schedule_timestamp', label: 'actual_schedule_timestamp', field: 'actual_schedule_timestamp', sortable: true },
-        { name: 'log_count', label: 'log_count', field: 'log_count', sortable: true },
-        { name: 'current_claim', label: 'current_claim', field: 'current_claim', sortable: true },
-        { name: 'vendor_id', label: 'vendor_id', field: 'vendor_id', sortable: true }
+        { name: 'actual_schedule_timestamp', align: 'center', label: 'DATE', field: 'actual_schedule_timestamp', sortable: true },
+        { name: 'uid', label: 'UID', field: 'uid', sortable: true },
+        { name: 'current_claim', label: 'Claim', field: 'current_claim', sortable: true },
+        { name: 'user_name', label: 'Cust Name', field: 'user_name', sortable: true },
+        { name: 'order_city', label: 'City', field: 'order_city', sortable: true },
+        { name: 'service_name2', label: 'Service', field: 'service_name2', sortable: true },
+        { name: 'amount', label: 'Amount', field: 'amount', sortable: true },
+        { name: 'order_amount', label: 'Total Order Amount', field: 'order_amount', sortable: true },
+        { name: 'payment_mode', label: 'Pay mode', field: 'payment_mode', sortable: true },
+        //{ name: 'amount', label: 'amount', field: 'amount', sortable: true },
+        // { name: 'online', label: 'online', field: 'online', sortable: true },
+        { name: 'order_status_string', label: 'Order Status', field: 'order_status_string', sortable: true },
+        { name: 'delivery_boy_name', label: 'Pilot', field: 'delivery_boy_name', sortable: true }
+        // { name: 'agent_number', label: 'agent_number', field: 'agent_number', sortable: true },
+        // { name: 'order_status_string', label: 'order_status_string', field: 'order_status_string', sortable: true },
+        // { name: 'created_at', label: 'created_at', field: 'created_at', sortable: true },
+        // { name: 'delivered_at', label: 'delivered_at', field: 'delivered_at', sortable: true },
+        // { name: 'actual_schedule_timestamp', label: 'actual_schedule_timestamp', field: 'actual_schedule_timestamp', sortable: true },
+        // { name: 'log_count', label: 'log_count', field: 'log_count', sortable: true },
+        // { name: 'current_claim', label: 'current_claim', field: 'current_claim', sortable: true },
+        // { name: 'vendor_id', label: 'vendor_id', field: 'vendor_id', sortable: true }
 
       ],
       data:[],
@@ -155,12 +156,12 @@ this.getdates();
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/testenv/api/vendor/get-today-vendorsdetails',config)
+       axios.get('https://www.chotabeta.app/dev/testenv/api/admin/live-orders-popup',config)    //https://www.stackroger.com/api/admin/location-today-live-orders-popup
       .then(function (response) {
         // handle success
         vm.loading = false;
         console.log(response,"getstateeee");
-        vm.data = response.data.done_orders;
+        vm.data = response.data.live_orders;
         console.log(vm.data,"vm.data");
         vm.data.forEach((row, index) => {
       row.index = index
@@ -217,6 +218,8 @@ today = mm + '/' + dd + '/' + yyyy;
     z-index: 1
   thead tr:first-child th
     top: 0
+
+    font-weight: 600
 
   /* this is when the loading indicator appears */
   &.q-table--loading thead tr:last-child th

@@ -83,10 +83,11 @@
      class="my-sticky-header-table"
       :filter="filter"
       :loading="loading"
+      title="Orders Rating"
       :data="data"
       :columns="columns"
       row-key="index"
-      style="height:600px;"
+      style="height:650px;"
       :pagination="initialPagination"
       binary-state-sort
        />

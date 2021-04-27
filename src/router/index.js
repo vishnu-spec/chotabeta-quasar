@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 // import 'ag-grid-enterprise';
 
 import routes from './routes'
+import store from '../store/index'
+
 
 Vue.use(VueRouter)
 
@@ -15,7 +17,7 @@ Vue.use(VueRouter)
  * with the Router instance.
  */
 
-export default function (/* { store, ssrContext } */) {
+export default function ( { store, ssrContext } ) {
   const Router = new VueRouter({
     scrollBehavior: () => ({ x: 0, y: 0 }),
     routes,
@@ -26,6 +28,37 @@ export default function (/* { store, ssrContext } */) {
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
   })
+
+    //by sagar
+    Router.beforeEach((to, from, next) => {
+      if (to.matched.some(record => record.meta.requiresAuth)) {
+        console.log("ok");
+
+        // this route requires auth, check if logged in
+        // if not, redirect to login page.
+        if (!store.getters.loggedIn) {
+          console.log("opkok");
+          next({
+            name: 'login',
+          })
+        } else {
+          next()
+        }
+      } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+        console.log("else");
+        if (store.getters.loggedIn) {
+          next({
+            name: 'dashboard',
+
+          })
+        } else {
+          next()
+        }
+      } else {
+        next() // make sure to always call next()!
+      }
+    });
+
 
   return Router
 }

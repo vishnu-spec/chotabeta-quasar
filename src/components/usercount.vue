@@ -1,26 +1,65 @@
 <template>
 <div class="q-pa-md">
     <div class="container">
-      <table border="1">
-              <thead>
-                <!-- <th>Cityname</th> -->
+      <div class="row">
+    <div class="row col-md-12">
+    <td>
+            <div class="col-md-12">
+              <q-btn label="Major Cities Count" color="primary" style="margin-left:0px;margin-bottom: 20px;"/>
+            </div>
+            </td>
+            </div>
+      </div>
+    </div>
+  <!-- <q-circular-progress
+      v-if="!data"
+      indeterminate
+      size="100px"
+      color="blue"
+      style="position:absolute;left:55%;top:45%;"
+    /> -->
+
+    <q-card style="overflow-x: scroll">
+       <table class="q-table responsive horizontal-delimiter" >
+  <thead style="background-color: #c1f4cd;">
+    <tr>
+                <th></th>
                 <th>Hyderabad</th>
-                <th>Bangalore</th>
                 <th>Vizag</th>
+                 <th>Bangalore</th>
                 <th>OtherCities</th>
                 <th>TotalCount</th>
+    </tr>
+  </thead>
+  <tbody style=" text-align:center;">
+    <tr>
+      <tr style="border-bottom:1px solid #ccc">
+      <td data-th='Today'>Today</td>
+      <td :data-th="tabledata.Hydcity">{{tabledata.Hydcity}}</td>
+      <td :data-th="tabledata.Vizagcity">{{tabledata.Vizagcity}}</td>
+      <td :data-th="tabledata.Bangalorecity">{{tabledata.Bangalorecity}}</td>
+      <td :data-th="tabledata.OtherCitys">{{tabledata.OtherCitys}}</td>
+      <td :data-th="tabledata.TotalCount">{{tabledata.TotalCount}}</td>
+      <!-- <td v-if="s.today_count" :data-th="s.today_count">{{s.today_count}}</td> -->
+      <!-- <td v-else :data-th="s.today_count">0</td> -->
+    </tr>
+  </tbody>
+  <tbody style=" text-align:center;">
+      <tr>
+          <tr  style="border-bottom:1px solid #ccc">
+    <td data-th='Yesterday'>Yesterday</td>
+      <td :data-th="tabledata.YHydcity">{{tabledata.YHydcity}}</td>
+      <td :data-th="tabledata.YVizagcity">{{tabledata.YVizagcity}}</td>
+      <td :data-th="tabledata.YBangalorecity">{{tabledata.YBangalorecity}}</td>
+      <td :data-th="tabledata.YOtherCitys">{{tabledata.YOtherCitys}}</td>
+      <td :data-th="tabledata.YTotalCount">{{tabledata.YTotalCount}}</td>
+          <!-- <td v-if="s.today_count" :data-th="s.today_count">{{s.today_count}}</td> -->
+          <!-- <td v-else :data-th="s.today_count">0</td> -->
+      </tr>
+  </tbody>
+</table>
+</q-card>
 
-              </thead>
-              <tbody style="text-align:center;">
-                <!-- <td>{{tabledata.Cityname}}</td> -->
-                <td>{{tabledata.Hydcity}}</td>
-                <td>{{tabledata.Bangalorecity}}</td>
-                <td>{{tabledata.Vizagcity}}</td>
-                <td>{{tabledata.OtherCitys}}</td>
-                <td>{{tabledata.TotalCount}}</td>
-              </tbody>
-            </table>
-    </div>
   </div>
 </template>
 
@@ -28,9 +67,10 @@
 import axios from 'axios';
 
 export default {
+
   data () {
     return {
-      tabledata:''
+      tabledata:undefined,
     }
     },
 
@@ -49,9 +89,7 @@ this.gettabledata();
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/testenv/api/today-downloads',
-       {
-    },config)
+       axios.post('https://chotabeta.app/dev/testenv/api/today-downloads',config)
       .then(function (response) {
         console.log(response,"getstateeee");
         vm.tabledata = response.data;

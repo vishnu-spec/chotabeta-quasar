@@ -3,7 +3,7 @@
     <img
       alt="ChotaBeta logo"
       src="~assets/CB Logo.png"
-      style="height:100px;"
+      style="height:135px;"
     >
   </q-page>
 </template>

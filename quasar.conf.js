@@ -78,6 +78,18 @@ module.exports = function (/* ctx */) {
       iconSet: 'material-icons', // Quasar icon set
       lang: 'en-us', // Quasar language pack
       config: {
+        // brand: {
+        //   primary: '#027BE3',
+        //   secondary: '#26A69A',
+        //   accent: '#9C27B0',
+
+        //   dark: '#1d1d1d',
+
+        //   positive: '#21BA45',
+        //   negative: '#C10015',
+        //   info: '#31CCEC',
+        //   warning: '#F2C037'
+        // },
         notify: { /* look at QUASARCONFOPTIONS from the API card (bottom of page) */ }
 
       },

@@ -22,10 +22,11 @@
      class="my-sticky-header-table"
       :filter="filter"
       :loading="loading"
+      title="Cancellation Orders"
       :data="data"
       :columns="columns"
       row-key="index"
-      style="height:600px;"
+      style="height:650px;"
       :pagination="initialPagination"
       binary-state-sort
        />
@@ -76,18 +77,16 @@ export default {
           label: '#',
           field: 'index'
         },
-        { name: 'id', align: 'center', label: 'id', field: 'id', sortable: true},
+        { name: 'uid', align: 'center', label: 'UID', field: 'uid', sortable: true},
+        { name: 'username', align: 'center', label: 'User Name', field: 'username', sortable: true},
         { name: 'order_id', align: 'center', label: 'OrderId', field: 'order_id', sortable: true},
-        { name: 'reason', align: 'center', label: 'Reason', field: 'reason', sortable: true},
+        { name: 'delivery_boy_name', align: 'center', label: 'DE Name', field: 'delivery_boy_name', sortable: true},
         { name: 'status', align: 'center', label: 'Status', field: 'status', sortable: true},
-        { name: 'request_cancellation', align: 'Request Cancellation', label: 'amount', field: 'request_cancellation', sortable: true},
-        { name: 'rep', align: 'center', label: 'Rep', field: 'rep', sortable: true},
-        { name: 'payment_status', align: 'center', label: 'payment_status', field: 'payment_status', sortable: true},
+        { name: 'reason', align: 'center', label: 'Cancellation Reason', field: 'reason', sortable: true},
+        { name: 'claim_by_ops', align: 'center', label: 'Claim By Ops', field: 'claim_by_ops', sortable: true},
+        { name: 'amount', align: 'center', label: 'Amount', field: 'amount', sortable: true},
         { name: 'created_at', align: 'center', label: 'Created at', field: 'created_at', sortable: true},
         { name: 'updated_at', align: 'center', label: 'Updated at', field: 'updated_at', sortable: true},
-        { name: 'uid', align: 'center', label: 'UID', field: 'uid', sortable: true},
-        { name: 'user_number', align: 'center', label: 'User Number', field: 'user_number', sortable: true},
-        { name: 'user_name', align: 'center', label: 'User Name', field: 'user_name', sortable: true},
       ],
       data:'',
     }

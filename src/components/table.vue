@@ -55,6 +55,11 @@
               <q-btn label="Today" @click="gettodaydata" type="submit" color="primary" style="margin-left:20px;margin-top: 20px;"/>
               <q-btn label="Yesterday" @click="getyesterdaydata" type="submit" color="primary" style="margin-left:20px;margin-top: 20px;"/>
               <q-btn label="Export to csv" icon-right="archive" @click="exportTable" type="submit" color="primary" style="margin-left:50px;margin-top: 20px;"/>
+               <!-- <template style="margin-left:-10 px;margin-top: 80px"> -->
+                <q-input border dense debounce="300" v-model="filter" placeholder="Search" style="margin-left:648px;margin-bottom: 10px;margin-top:-40px;">
+          <q-icon slot="append" name="search" />
+        </q-input>
+      <!-- </template> -->
     <!-- <q-form
       @submit="Filter"
       @reset="onReset"
@@ -82,11 +87,12 @@
     <q-table
      class="my-sticky-header-table"
       :filter="filter"
+      title="Orders Report"
       :loading="loading"
       :data="data"
       :columns="columns"
       row-key="index"
-      style="height:600px;"
+      style="height:630px;"
       :pagination="initialPagination"
       binary-state-sort
        />
@@ -147,23 +153,23 @@ export default {
         //   format: val => `${val}`,
         //   sortable: true
         // },
-        { name: 'id', align: 'center', label: 'id', field: 'id', sortable: true},
-        { name: 'uid', align: 'center', label: 'uid', field: 'uid', sortable: true},
-        { name: 'service_name2', align: 'center', label: 'service_name2', field: 'service_name2', sortable: true},
-        { name: 'delivery_boy_name', align: 'center', label: 'delivery_boy_name', field: 'delivery_boy_name', sortable: true},
-        { name: 'amount', align: 'center', label: 'amount', field: 'amount', sortable: true},
-        { name: 'online', align: 'center', label: 'online', field: 'online', sortable: true},
-        { name: 'payment_status', align: 'center', label: 'payment_status', field: 'payment_status', sortable: true},
-        { name: 'payment_mode', align: 'center', label: 'payment_mode', field: 'payment_mode', sortable: true},
-        { name: 'order_user_name', align: 'center', label: 'order_user_name', field: 'order_user_name', sortable: true},
+        { name: 'id', align: 'center', label: 'ID', field: 'id', sortable: true},
+        { name: 'uid', align: 'center', label: 'UID', field: 'uid', sortable: true},
+        { name: 'service_name2', align: 'center', label: 'Service Name', field: 'service_name2', sortable: true},
+        { name: 'delivery_boy_name', align: 'center', label: 'Delivery Boy Name', field: 'delivery_boy_name', sortable: true},
+        { name: 'amount', align: 'center', label: 'Amount', field: 'amount', sortable: true},
+        { name: 'online', align: 'center', label: 'Online', field: 'online', sortable: true},
+        { name: 'payment_status', align: 'center', label: 'Payment Status', field: 'payment_status', sortable: true},
+        { name: 'payment_mode', align: 'center', label: 'Payment Mode', field: 'payment_mode', sortable: true},
+        { name: 'order_user_name', align: 'center', label: 'Order User Name', field: 'order_user_name', sortable: true},
         // { name: 'order_user_mobile', align: 'center', label: 'order_user_mobile', field: 'order_user_mobile', sortable: true},
-        { name: 'order_status_string', align: 'center', label: 'order_status_string', field: 'order_status_string', sortable: true},
-        { name: 'order_date', align: 'center', label: 'order_date', field: 'order_date', sortable: true},
-        { name: 'coupon', align: 'center', label: 'coupon', field: 'coupon', sortable: true},
-        { name: 'coupon_value', align: 'center', label: 'coupon_value', field: 'coupon_value', sortable: true},
-        { name: 'actual_schedule_timestamp', align: 'center', label: 'actual_schedule_timestamp', field: 'actual_schedule_timestamp', sortable: true},
-        { name: 'current_claim', align: 'center', label: 'current_claim', field: 'current_claim', sortable: true},
-        { name: 'order_city', align: 'center', label: 'order_city', field: 'order_city', sortable: true},
+        { name: 'order_status_string', align: 'center', label: 'Order Status String', field: 'order_status_string', sortable: true},
+        { name: 'order_date', align: 'center', label: 'Order Date', field: 'order_date', sortable: true},
+        { name: 'coupon', align: 'center', label: 'Coupon', field: 'coupon', sortable: true},
+        { name: 'coupon_value', align: 'center', label: 'Coupon Value', field: 'coupon_value', sortable: true},
+        { name: 'actual_schedule_timestamp', align: 'center', label: 'Actual Schedule Timestamp', field: 'actual_schedule_timestamp', sortable: true},
+        { name: 'current_claim', align: 'center', label: 'Current Claim', field: 'current_claim', sortable: true},
+        { name: 'order_city', align: 'center', label: 'Order City', field: 'order_city', sortable: true},
       ],
       data:[],
       today_date:'',
@@ -175,6 +181,7 @@ export default {
         //  this.test();
 
 this.getdates();
+this.gettodaydata();
 
     },
 
@@ -220,7 +227,7 @@ this.getdates();
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/redis_test/testenv/api/admin/orders-dashboard',
+       axios.post('https://chotabeta.app/dev/testenv/api/admin/orders-dashboard',
        {
            "from_date": vm.today_date,
         "to_date": vm.today_date
@@ -255,7 +262,7 @@ this.getdates();
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/redis_test/testenv/api/admin/orders-dashboard',
+       axios.post('https://chotabeta.app/dev/testenv/api/admin/orders-dashboard',
        {
            "from_date": vm.yesterday_date,
         "to_date": vm.yesterday_date
@@ -329,7 +336,7 @@ today = mm + '/' + dd + '/' + yyyy;
         "Authorization": `Bearer ${access_token}`,
       }
     }
-       axios.post('https://chotabeta.app/dev/redis_test/testenv/api/admin/orders-dashboard',
+       axios.post('https://chotabeta.app/dev/testenv/api/admin/orders-dashboard',
        {
            "from_date": vm.from_date,
         "to_date": vm.to_date

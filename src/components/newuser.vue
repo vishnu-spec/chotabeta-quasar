@@ -6,6 +6,7 @@
     <td>
             <div class="col-md-12">
               <q-btn label="Export to csv" icon-right="archive" @click="exportTable" type="submit" color="primary" style="margin-left:0px;margin-bottom: 20px;"/>
+              <!-- <q-btn label="New USer Table"  color="primary" style="margin-left:450px;margin-bottom: 20px;"/> -->
             </div>
             </td>
             </div>
@@ -22,10 +23,11 @@
      class="my-sticky-header-table"
       :filter="filter"
       :loading="loading"
+      title="New User"
       :data="data"
       :columns="columns"
       row-key="index"
-      style="height:600px;"
+      style="height:650px;"
       :pagination="initialPagination"
       binary-state-sort
        />
@@ -140,6 +142,9 @@ this.gettabledata();
         console.log(response,"getstateeee");
         vm.data = response.data.UserTable;
         console.log(vm.data,"vm.data");
+        vm.data.forEach((row, index) => {
+        row.index = index
+      })
 
 
       })
